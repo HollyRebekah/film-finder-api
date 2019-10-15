@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon -r dotenv/config index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,7 +26,9 @@
     "eslint-plugin-react": "^7.9.1"
   },
   "dependencies": {
+    "dotenv": "^8.1.0",
     "express": "^4.17.1",
-    "mongoose": "^5.7.5"
+    "mongoose": "^5.7.5",
+    "nodemon": "^1.19.3"
   }
 }
