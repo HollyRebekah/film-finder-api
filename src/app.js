@@ -8,8 +8,10 @@ app.get('/', (req, res) => {
   res.status(200).json({ message: 'This is an API' });
 });
 
-app.post('/filmfinder/user', userController.create);
+app.post('/filmfinder/users', userController.create);
 
-app.get('/filmfinder/user', userController.list);
+app.get('/filmfinder/users', userController.list);
+
+app.get('/filmfinder/users/:id', userController.find);
 
 module.exports = app;
