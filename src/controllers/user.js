@@ -11,7 +11,7 @@ exports.create = (req, res) => {
   });
   user.save()
     .then(() => {
-      res.status(201).json(user);
+      res.status(201).json(user.removePassword());
     })
     .catch((error) => {
       if (error.name === 'ValidationError') {

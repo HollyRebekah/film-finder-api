@@ -27,9 +27,11 @@ describe('/filmfinder/users', () => {
             expect(user.firstName).to.equal('Holly');
             expect(user.lastName).to.equal('Fanthorpe');
             expect(user.email).to.equal('holly@testemail.com');
-            expect(user.password).to.equal('thisismypassword');
+            expect(user.password).not.equal('thisismypassword');
+            expect(user.password).to.have.lengthOf(60);
             expect(user.favouriteGenres).to.contain(null);
             expect(user.filmsWatched).to.contain(null);
+            expect(res.body).not.have.property('password');
             done();
           });
         });
