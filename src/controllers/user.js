@@ -12,6 +12,18 @@ exports.create = (req, res) => {
   user.save()
     .then(() => {
       res.status(201).json(user);
+    })
+    .catch((error) => {
+      if (error.name === 'ValidationError') {
+        const emailError = error.errors.email ? error.errors.email.message : null;
+        res.status(400).json({
+          errors: {
+            email: emailError,
+          },
+        });
+      } else {
+        res.sendStatus(500);
+      }
     });
 };
 
