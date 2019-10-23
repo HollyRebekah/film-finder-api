@@ -1,6 +1,6 @@
 const User = require('../models/user');
 
-exports.create = (req, res) => {
+exports.signUp = (req, res) => {
   const user = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -28,6 +28,24 @@ exports.create = (req, res) => {
       }
     });
 };
+
+exports.logIn = (req, res) => {
+  User.findOne({ email: req.body.email })
+    .then((user) => {
+      if (user.validatePassword(req.body.password)) {
+        res.status(200).json(user);
+      } else {
+        res.status(401).json({
+          message: 'The email/password combination is incorrect',
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+};
+
 
 exports.list = (req, res) => {
   User.find({}, (err, users) => {
