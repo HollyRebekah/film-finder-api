@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const app = require('./src/app');
 
-const port = 3000;
+const port = 8080;
 
 mongoose.connect(process.env.DATABASE_CONN, {
   useNewUrlParser: true,

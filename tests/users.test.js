@@ -29,8 +29,8 @@ describe('/filmfinder/users', () => {
             expect(user.email).to.equal('holly@testemail.com');
             expect(user.password).not.equal('thisismypassword');
             expect(user.password).to.have.lengthOf(60);
-            expect(user.favouriteGenres).to.contain(null);
-            expect(user.filmsWatched).to.contain(null);
+            expect(user.favouriteGenres).to.be.a('array');
+            expect(user.filmsWatched).to.be.a('array');
             expect(res.body).not.have.property('password');
             done();
           });
@@ -101,6 +101,25 @@ describe('/filmfinder/users', () => {
             done();
           });
       });
+    });
+
+    it('adds a film to a users films watched field', (done) => {
+      const user = users[0];
+      chai.request(server)
+        .post(`/filmfinder/users/${user._id}`)
+        .send({
+          user: user._id,
+          movie: 'Jaws',
+        })
+        .end((err, res) => {
+          expect(err).to.equal(null);
+          expect(res.status).to.equal(201);
+
+          User.findById(res.body._id, (err, returnedUser) => {
+            expect(returnedUser.filmsWatched).to.contain('Jaws');
+            done();
+          });
+        });
     });
   });
 });

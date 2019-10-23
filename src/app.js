@@ -14,4 +14,6 @@ app.get('/filmfinder/users', userController.list);
 
 app.get('/filmfinder/users/:id', userController.find);
 
+app.post('/filmfinder/users/:id', userController.watchedFilm);
+
 module.exports = app;
