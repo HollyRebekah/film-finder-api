@@ -18,6 +18,6 @@ app.get('/filmfinder/users', userController.list);
 
 app.get('/filmfinder/users/:id', userController.find);
 
-app.post('/filmfinder/users/:id', userController.watchedFilm);
+app.post('/filmfinder/user/movie', userController.watchedFilm);
 
 module.exports = app;

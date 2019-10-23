@@ -60,11 +60,12 @@ exports.find = (req, res) => {
 };
 
 exports.watchedFilm = (req, res) => {
-  User.findById(req.body.user, (err, user) => {
-    user.filmsWatched.push(req.body.movie);
-    user.save()
-      .then(() => {
-        res.status(201).json(user.removePassword());
-      });
-  });
+  User.findOne({ email: req.body.email })
+    .then((user) => {
+      user.filmsWatched.push(req.body.movie);
+      user.save()
+        .then(() => {
+          res.status(201).json(user.removePassword());
+        });
+    });
 };
