@@ -6,8 +6,8 @@ exports.create = (req, res) => {
     lastName: req.body.lastName,
     email: req.body.email,
     password: req.body.password,
-    favouriteGenres: [null],
-    filmsWatched: [null],
+    favouriteGenres: [],
+    filmsWatched: [],
   });
   user.save()
     .then(() => {
@@ -38,5 +38,15 @@ exports.list = (req, res) => {
 exports.find = (req, res) => {
   User.findById(req.params.id, (err, user) => {
     res.status(201).json(user);
+  });
+};
+
+exports.watchedFilm = (req, res) => {
+  User.findById(req.body.user, (err, user) => {
+    user.filmsWatched.push(req.body.movie);
+    user.save()
+      .then(() => {
+        res.status(201).json(user.removePassword());
+      });
   });
 };
