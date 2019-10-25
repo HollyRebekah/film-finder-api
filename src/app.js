@@ -1,6 +1,7 @@
 const express = require('express');
-const userController = require('./controllers/user');
 const cors = require('cors');
+const userController = require('./controllers/user');
+const authController = require('./controllers/auth');
 
 const app = express();
 app.use(express.json());
@@ -12,12 +13,12 @@ app.get('/', (req, res) => {
 
 app.post('/filmfinder/users', userController.signUp);
 
-app.post('/filmfinder/auth', userController.logIn);
-
 app.get('/filmfinder/users', userController.list);
 
 app.get('/filmfinder/users/:id', userController.find);
 
 app.post('/filmfinder/user/movie', userController.watchedFilm);
+
+app.post('/filmfinder/auth', authController.logIn);
 
 module.exports = app;
