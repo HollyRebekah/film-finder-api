@@ -1,18 +1,22 @@
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 
 exports.logIn = (req, res) => {
   User.findOne({ email: req.body.email })
     .then((user) => {
-      if (user.validatePassword(req.body.password)) {
-        res.status(200).json(user);
-      } else {
-        res.status(401).json({
-          message: 'The email/password combination is incorrect',
+      if (user !== null && user.validatePassword(req.body.password)) {
+        const payload = {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          filmsWatched: user.filmsWatched,
+          id: user._id,
+        };
+
+        jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1w' }, (err, token) => {
+          res.status(200).json(token);
         });
+      } else {
+        res.sendStatus(401);
       }
-    })
-    .catch((error) => {
-      console.log(error);
-      res.sendStatus(500);
     });
 };

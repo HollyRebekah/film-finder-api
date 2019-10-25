@@ -37,8 +37,8 @@ userSchema.methods.removePassword = function removePassword() {
   return rest;
 };
 
-userSchema.methods.validatePassword = function validatePassword(password) {
-  return bcrypt.compareSync(password, this.password);
+userSchema.methods.validatePassword = function validatePassword(guess) {
+  return bcrypt.compareSync(guess, this.password);
 };
 
 const User = mongoose.model('User', userSchema);
