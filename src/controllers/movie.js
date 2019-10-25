@@ -1,4 +1,4 @@
-const User = require('../controllers/user');
+const User = require('../models/user');
 
 exports.watchedFilm = (req, res) => {
   User.findOne({ email: req.body.email })
