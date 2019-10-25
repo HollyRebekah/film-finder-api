@@ -1,23 +1,17 @@
 const express = require('express');
-const userController = require('./controllers/user');
 const cors = require('cors');
+const userRouter = require('./routes/users');
+const movieRouter = require('./routes/movie');
+const authRouter = require('./routes/auth');
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.status(200).json({ message: 'This is an API' });
-});
+app.use('/filmfinder', userRouter);
 
-app.post('/filmfinder/users', userController.signUp);
+app.use('/filmfinder', movieRouter);
 
-app.post('/filmfinder/auth', userController.logIn);
-
-app.get('/filmfinder/users', userController.list);
-
-app.get('/filmfinder/users/:id', userController.find);
-
-app.post('/filmfinder/user/movie', userController.watchedFilm);
+app.use('/filmfinder', authRouter);
 
 module.exports = app;

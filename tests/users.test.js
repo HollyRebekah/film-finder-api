@@ -106,19 +106,16 @@ describe('/filmfinder/users', () => {
     it('adds a film to a users films watched field', (done) => {
       const user = users[0];
       chai.request(server)
-        .post(`/filmfinder/users/${user._id}`)
+        .post('/filmfinder/users/movie')
         .send({
-          user: user._id,
+          email: user.email,
           movie: 'Jaws',
         })
         .end((err, res) => {
           expect(err).to.equal(null);
           expect(res.status).to.equal(201);
-
-          User.findById(res.body._id, (err, returnedUser) => {
-            expect(returnedUser.filmsWatched).to.contain('Jaws');
-            done();
-          });
+          expect(res.body.filmsWatched).to.contain('Jaws');
+          done();
         });
     });
   });
