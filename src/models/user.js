@@ -15,6 +15,8 @@ const userSchema = new mongoose.Schema({
   },
   favouriteGenres: Array,
   filmsWatched: Array,
+  filmImages: Array,
+
 });
 
 userSchema.pre('save', function encrytPassword(next) {

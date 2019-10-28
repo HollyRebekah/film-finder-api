@@ -8,7 +8,9 @@ exports.logIn = (req, res) => {
         const payload = {
           firstName: user.firstName,
           lastName: user.lastName,
+          email: user.email,
           filmsWatched: user.filmsWatched,
+          filmImages: user.filmImages,
           id: user._id,
         };
 
