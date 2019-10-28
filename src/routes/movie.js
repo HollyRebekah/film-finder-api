@@ -5,5 +5,9 @@ const router = express.Router();
 
 
 router.post('/users/movie', movieController.watchedFilm);
+router.get('/movies', movieController.returnMovies);
+router.post('/movies/drama', movieController.saveMovie);
+router.post('/movies/comedy', movieController.saveMovie);
+router.post('/movies/kids', movieController.saveMovie);
 
 module.exports = router;
