@@ -13,12 +13,13 @@ exports.watchedFilm = (req, res) => {
     });
 };
 
-exports.saveMovie = (req, res) =>{
+exports.saveMovie = (req, res) => {
   const movie = new Movie({
     title: req.body.title,
     image: req.body.image,
     synopsis: req.body.synopsis,
     runtime: req.body.runtime,
+    genre: req.body.movie,
   });
   movie.save()
     .then(() => {
@@ -30,4 +31,12 @@ exports.returnMovies = (req, res) => {
   Movie.find({}, (err, movies) => {
     res.status(201).json(movies);
   });
+};
+
+exports.returnMovieByGenre = (req, res) => {
+  Movie.find({ genre: req.body.genre })
+    .then((movies) => {
+      console.log(movies);
+      res.status(201).json(movies);
+    });
 };
