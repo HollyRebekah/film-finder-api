@@ -18,8 +18,9 @@ exports.saveMovie = (req, res) => {
     title: req.body.title,
     image: req.body.image,
     synopsis: req.body.synopsis,
+    rating: req.body.synopsis,
     runtime: req.body.runtime,
-    genre: req.body.movie,
+    genre: req.body.genre,
   });
   movie.save()
     .then(() => {
@@ -28,7 +29,7 @@ exports.saveMovie = (req, res) => {
 };
 
 exports.returnMovies = (req, res) => {
-  Movie.find({}, (err, movies) => {
+  Movie.find({ genre: req.body.genre }, (err, movies) => {
     res.status(201).json(movies);
   });
 };
