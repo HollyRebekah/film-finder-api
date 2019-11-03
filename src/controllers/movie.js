@@ -5,7 +5,6 @@ exports.watchedFilm = (req, res) => {
   User.findOne({ email: req.body.email })
     .then((user) => {
       user.filmsWatched.push(req.body.movie);
-      user.filmImages.push(req.body.movieImage);
       user.save()
         .then(() => {
           res.status(201).json(user.removePassword());
@@ -37,7 +36,16 @@ exports.returnMovies = (req, res) => {
 exports.returnMovieByGenre = (req, res) => {
   Movie.find({ genre: req.body.genre })
     .then((movies) => {
-      console.log(movies);
       res.status(201).json(movies);
+    });
+};
+
+exports.returnImage = (req, res) => {
+
+  Movie.find({ title: { $in: req.body.title } })
+    .then((movies) => {
+      const images = movies.map(m => m.image);
+      const uniqueImages = [... new Set(images)];
+      res.status(201).json(uniqueImages);
     });
 };
