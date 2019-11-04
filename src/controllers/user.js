@@ -36,7 +36,9 @@ exports.list = (req, res) => {
 };
 
 exports.find = (req, res) => {
-  User.findById(req.params.id, (err, user) => {
-    res.status(201).json(user);
-  });
+  User.findOne()
+    .where('email').equals(req.params.email)
+    .exec((err, user) => {
+      res.status(201).json(user.removePassword());
+    });
 };

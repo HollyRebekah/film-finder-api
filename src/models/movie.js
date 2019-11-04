@@ -6,6 +6,7 @@ const movieSchema = new mongoose.Schema({
   synopsis: String,
   runtime: String,
   genre: String,
+  comment: String,
 });
 
 const Movie = mongoose.model('Movie', movieSchema);
