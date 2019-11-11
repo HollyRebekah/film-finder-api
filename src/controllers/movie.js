@@ -12,6 +12,17 @@ exports.watchedFilm = (req, res) => {
     });
 };
 
+exports.addedComment = (req, res) => {
+  Movie.findOne({ title: req.body.title })
+    .then((movie) => {
+      movie.comment.push(req.body.comment);
+      movie.save()
+        .then(() => {
+          res.status(201).json(movie);
+        });
+    });
+};
+
 exports.saveMovie = (req, res) => {
   const movie = new Movie({
     title: req.body.title,
@@ -20,6 +31,7 @@ exports.saveMovie = (req, res) => {
     rating: req.body.synopsis,
     runtime: req.body.runtime,
     genre: req.body.genre,
+    comment: req.body.comment,
   });
   movie.save()
     .then(() => {
@@ -28,7 +40,7 @@ exports.saveMovie = (req, res) => {
 };
 
 exports.returnMovies = (req, res) => {
-  Movie.find({ genre: req.body.genre }, (err, movies) => {
+  Movie.find({}, (err, movies) => {
     res.status(201).json(movies);
   });
 };
