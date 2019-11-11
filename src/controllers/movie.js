@@ -28,7 +28,7 @@ exports.saveMovie = (req, res) => {
 };
 
 exports.returnMovies = (req, res) => {
-  Movie.find({ genre: req.body.genre }, (err, movies) => {
+  Movie.find({}, (err, movies) => {
     res.status(201).json(movies);
   });
 };
