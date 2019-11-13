@@ -56,8 +56,6 @@ exports.returnImage = (req, res) => {
 
   Movie.find({ title: { $in: req.body.title } })
     .then((movies) => {
-      const images = movies.map(m => m.image);
-      const uniqueImages = [... new Set(images)];
-      res.status(201).json(uniqueImages);
+      res.status(201).json(movies);
     });
 };
