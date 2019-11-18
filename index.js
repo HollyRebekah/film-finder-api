@@ -11,6 +11,8 @@ mongoose.connect(process.env.DATABASE_CONN, {
   useUnifiedTopology: true,
 }, (err) => {
   console.log(err);
-  app.listen(port, host, function() {
-    console.log("Server started......."));
-});
+  app.listen(port, host, function () {
+    console.log('Server started.......');
+  });
+})
+;
