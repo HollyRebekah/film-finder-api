@@ -8,6 +8,5 @@ mongoose.connect(process.env.DATABASE_CONN, {
   useUnifiedTopology: true,
 }, (err) => {
   console.log(err);
-  app.listen(process.env.PORT, () => {
-  });
+  app.listen(process.env.PORT);
 });
